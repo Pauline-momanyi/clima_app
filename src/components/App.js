@@ -6,17 +6,13 @@ import Header from "./dashboard/Header";
 import Categories from "./dashboard/Categories";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp"
+import QuestionList from "./dashboard/QuestionList";
+import Main from "./dashboard/Main";
 
 function App() {
   return (
     <Router>
-      <div className="sm:mx-10">
-        <Nav />
-        <div className="flex mt-2 mx-2">
-          <Categories />
-          <Header />
-        </div>
-      </div>
+      <Main/>
       <Switch>
         <Route exact path='/signin'><SignIn/></Route>
         <Route exact path='/signup'><SignUp/></Route>

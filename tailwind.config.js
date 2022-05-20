@@ -10,8 +10,10 @@ module.exports = {
           primary: '#fa510f'
         },
         gray:{
-          secondary: 'd0c8c8'
-        },
+          secondary: '#d0c8c8',
+          primary: '#f0ecec'
+          
+        }
 
       },
     },
