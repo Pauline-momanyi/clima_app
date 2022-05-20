@@ -12,10 +12,10 @@ function App() {
     <Router>
       <div className="sm:mx-10">
         <Nav />
-        {/* <div className="flex mt-2 mx-2">
+        <div className="flex mt-2 mx-2">
           <Categories />
           <Header />
-        </div> */}
+        </div>
       </div>
       <Switch>
         <Route exact path='/signin'><SignIn/></Route>

@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+import { auth } from '../../config/fbConfig'
+import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
 
 function SignIn() {
     const [formData, setFormData] = useState({
@@ -10,15 +12,30 @@ function SignIn() {
         setFormData({...formData, [e.target.id]:e.target.value})
     }
 
-    function handleSubmit(e){
-        e.preventDefault()
-        console.log(formData);
-    }
+   const [user, setUser] = useState({})
+
+   useEffect(()=>{
+    onAuthStateChanged(auth, (currentUser)=>{
+        setUser(currentUser)
+    })
+   },[])
+
+   const handleSignin = async(e)=>{
+    e.preventDefault()
+    console.log(formData);
+    try{
+        const user = await signInWithEmailAndPassword(auth, formData.email, formData.password)
+        console.log(user);
+    }catch(error){
+        console.log(error.message);
+    }        
+}
 
   return (
     <div className="flex flex-col justify-center items-center">
-        
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-4" onSubmit={handleSubmit}>
+        <h3>Signed in as:</h3>
+        {user? user.email:"Not logged in"}
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-4" onSubmit={handleSignin}>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                     email
