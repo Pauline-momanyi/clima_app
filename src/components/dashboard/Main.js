@@ -5,26 +5,21 @@ import Header from "./Header";
 import QuestionList from "./QuestionList";
 
 function Main() {
+    const [isfetch, setisFetch] = useState(true)
     const [data, setData] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
+    
     useEffect(()=>{
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Host': 'stack-overflow.p.rapidapi.com',
-                'X-RapidAPI-Key': 'a37da41679msh85c390529de135dp134b22jsn8fe66d12cf5d'
-            }
-        };
-        
-        fetch('https://stack-overflow.p.rapidapi.com/?q=Javascript&size=5', options)
-            .then(response => response.json())
-            .then(response => {
-                setData(response.data)
-                setIsLoaded(true)
-            })
-                
-            .catch(err => console.error(err.message));
+        fetch('http://localhost:3000/questions')
+        .then(res=>res.json())
+        .then(data=>{
+            setData(data)
+            setIsLoaded(true)
+        })
+        .catch(err=>console.log(err.message))
     },[])
+
+    console.log(data);
 
   return (
     <main>
@@ -34,7 +29,7 @@ function Main() {
           <Categories />
           <div>
             <Header />
-            <QuestionList questonData={data} isLoaded={isLoaded}/>
+            <QuestionList questionData={data} isLoaded={isLoaded}/>
           </div>
         </div>
       </div>
@@ -43,3 +38,23 @@ function Main() {
 }
 
 export default Main;
+
+
+  // useEffect(()=>{
+    //     const options = {
+    //         method: 'GET',
+    //         headers: {
+    //             'X-RapidAPI-Host': 'stack-overflow.p.rapidapi.com',
+    //             'X-RapidAPI-Key': 'a37da41679msh85c390529de135dp134b22jsn8fe66d12cf5d'
+    //         }
+    //     };
+        
+    //     fetch('https://stack-overflow.p.rapidapi.com/?q=Javascript', options)
+    //         .then(response => response.json())
+    //         .then(response => {
+    //             setData(response.data)
+    //             setIsLoaded(true)
+    //         })
+                
+    //         .catch(err => console.error(err.message));
+    // },[isfetch])

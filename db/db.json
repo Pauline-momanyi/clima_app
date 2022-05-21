@@ -1,0 +1,84 @@
+{
+    "questions": [
+      {
+        "id": 1,
+        "title": "How do I include a JavaScript file in another JavaScript file?",
+        "question": "Is there something in JavaScript similar to <code>@import</code> in CSS that allows you to include a JavaScript file inside another JavaScript file?",
+        "tags": [
+            {"id":1, "tag": "javascript"},
+            {"id":2, "tag": "import"}
+        ]
+      },
+      {
+        "id": 2,
+        "title": "pretty-print JSON using JavaScript",
+        "question": "How can I display JSON in an easy-to-read (for human readers) format? I'm looking primarily for indentation and whitespace, with perhaps even colors",
+        "tags": [
+            {"id":1, "tag": "javascript"},
+            {"id":2, "tag": "import"}
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Get the current URL with JavaScript?",
+        "question": "How can I display JSON in an easy-to-read (for human readers) format? I'm looking primarily for indentatiAll I want is to get the website URL. Not the URL as taken from a link. On the page loading I need to be able to grab the full, current URL of the website and set it as a variable to do with as I please.",
+        "tags": [
+            {"id":1, "tag": "javascript"},
+            {"id":2, "tag": "url"}
+        ]
+      }
+
+    ],
+    "comments":[
+        {
+            "id": 1,
+            "upvote":2,
+            "downvotes":3,
+            "comment": "The old versions of JavaScript had no import, include, or require, so many different approaches to this problem have been developed.",
+            "questionId":1
+        },
+        {
+            "id": 1,
+            "upvote":2,
+            "downvotes":3,
+            "comment": "The old versions of JavaScript had no import, include, or require, so many different approaches to this problem have been developed.",
+            "questionId":1
+        },
+        {
+            "id": 1,
+            "upvote":2,
+            "downvotes":3,
+            "comment": "The old versions of JavaScript had no import, include, or require, so many different approaches to this problem have been developed.",
+            "questionId":1
+        },
+        {
+            "id": 1,
+            "upvote":2,
+            "downvotes":3,
+            "comment": "The old versions of JavaScript had no import, include, or require, so many different approaches to this problem have been developed.",
+            "questionId":2
+        },
+        {
+            "id": 1,
+            "upvote":2,
+            "downvotes":3,
+            "comment": "The old versions of JavaScript had no import, include, or require, so many different approaches to this problem have been developed.",
+            "questionId":2
+        },
+        {
+            "id": 1,
+            "upvote":2,
+            "downvotes":3,
+            "comment": "The old versions of JavaScript had no import, include, or require, so many different approaches to this problem have been developed.",
+            "questionId":3
+        },
+        {
+            "id": 1,
+            "upvote":2,
+            "downvotes":3,
+            "comment": "The old versions of JavaScript had no import, include, or require, so many different approaches to this problem have been developed.",
+            "questionId":3
+        }
+    ]
+
+  }
