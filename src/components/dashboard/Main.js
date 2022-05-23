@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from "react";
-import Nav from "../layout/Nav";
+import {Redirect} from 'react-router-dom'
 import Categories from "./Categories";
 import Header from "./Header";
 import QuestionList from "./QuestionList";
 
-function Main() {
+function Main({authorized}) {
     const [isfetch, setisFetch] = useState(true)
     const [data, setData] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
+
     
     useEffect(()=>{
-        fetch('http://localhost:3000/questions')
+        fetch('http://localhost:3000/questions?_embed=comments')
         .then(res=>res.json())
         .then(data=>{
             setData(data)
@@ -21,10 +22,15 @@ function Main() {
 
     console.log(data);
 
+
+    if(!authorized){
+      return <Redirect to='/signup'/>
+    }
+
   return (
     <main>
+       
       <div className="sm:mx-10">
-        <Nav />
         <div className="flex mt-2 mx-2">
           <Categories />
           <div>

@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import logo from '../../mqlogo.png'
 import Button from './Button'
+import  QuestionForm from './QuestionForm'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch, faBars, faXmark, faHouse, faUserGroup } from "@fortawesome/free-solid-svg-icons"
 

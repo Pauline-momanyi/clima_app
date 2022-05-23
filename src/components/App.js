@@ -1,22 +1,27 @@
-import "../App.css";
 import { BrowserRouter as Router , Switch, Route} from "react-router-dom";
 import Nav from "./layout/Nav";
-import Try from "./Try";
-import Header from "./dashboard/Header";
-import Categories from "./dashboard/Categories";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp"
-import QuestionList from "./dashboard/QuestionList";
+import Users from "./layout/Users";
+import QuestionForm from "./layout/QuestionForm";
 import Main from "./dashboard/Main";
+import Footer from "./layout/Footer";
 
 function App() {
   return (
-    <Router>
-      <Main/>
-      <Switch>
-        <Route exact path='/signin'><SignIn/></Route>
-        <Route exact path='/signup'><SignUp/></Route>
-      </Switch>
+    <Router >
+      <div className="w-full">
+        <Nav/>
+        <Switch>
+          <Route exact path='/signin' component={SignIn}/>
+          <Route exact path='/signup' component={SignUp}/> 
+          <Route exact path='/users' component={Users}/>
+          <Route exact path='/post' component={QuestionForm}/>                   
+          <Route exact path='/'><Main authorized={true}/></Route>
+        </Switch>
+        <Footer/>
+      </div>
+     
     </Router>
   );
 }

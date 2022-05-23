@@ -1,8 +1,13 @@
 import React, {useEffect, useState} from 'react'
+// import { useHistory } from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../../config/fbConfig'
 
+
 function SignUp() {
+    // let history = useHistory()
+    // history.push('/href')
     const [formData, setFormData] = useState({
         fName:"",
         lName:"",

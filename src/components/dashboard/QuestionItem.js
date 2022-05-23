@@ -4,6 +4,7 @@ import { faComments, faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-sv
 
 function QuestionItem({questionData}) {
     const tags = questionData.tags.map(ntag=>(`#${ntag.tag}`))
+    const comments =  questionData.comments.map(acomment=>(acomment.comment))
 
   return (
     <div className='shadow-md p-2'>
@@ -13,9 +14,10 @@ function QuestionItem({questionData}) {
         </div>
         <div>
             <p className='bg-orange-50 max-w-fit px-1 italic text-xs text-orange-primary'>{tags}</p>
-            <FontAwesomeIcon icon={faComments} className='mx-3'></FontAwesomeIcon>
+            {questionData.comments.length}<FontAwesomeIcon icon={faComments} className='mx-3'></FontAwesomeIcon>
             <FontAwesomeIcon icon={faThumbsUp} className='mx-3'></FontAwesomeIcon>
             <FontAwesomeIcon icon={faThumbsDown} className='mx-3'></FontAwesomeIcon>
+            
             
         </div>   
     </div>
