@@ -8,8 +8,8 @@ import QuestionForm from "./layout/QuestionForm";
 import Main from "./dashboard/Main";
 import Footer from "./layout/Footer";
 import { onAuthStateChanged } from 'firebase/auth'
-
 import { auth } from '../config/fbConfig'
+import FbFetch from "./FbFetch";
 
 function App() {
   const [authorized, setAuthorized] = useState(false)
@@ -26,6 +26,7 @@ function App() {
   return (
     <>
         <Nav/>
+        <FbFetch/>
         <Switch>
             <Route  path='/signin' exact component={SignIn}/>
             <Route exact path='/signup'><SignUp user={user}/></Route>
