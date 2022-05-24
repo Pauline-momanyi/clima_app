@@ -1,13 +1,9 @@
-import React, {useEffect, useState} from 'react'
-// import { useHistory } from 'react-router-dom'
-import {Redirect} from 'react-router-dom'
+import React, { useState } from 'react'
+import { useHistory, Redirect } from 'react-router-dom'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
 import { auth } from '../../config/fbConfig'
 
-
-function SignUp() {
-    // let history = useHistory()
-    // history.push('/href')
+function SignUp({user}) {
     const [formData, setFormData] = useState({
         fName:"",
         lName:"",
@@ -19,15 +15,7 @@ function SignUp() {
     function handleChange(e){
         setFormData({...formData, [e.target.id]:e.target.value})
     }
-
-    const [user, setUser] = useState({})
-
-    useEffect(()=>{
-        onAuthStateChanged(auth, (currentUser)=>{
-            setUser(currentUser)
-        })
-    },[])
-   
+ 
 
     const handleSubmit = async(e)=>{
         e.preventDefault()
@@ -41,11 +29,21 @@ function SignUp() {
        
     }
 
+    if(user){
+        return <Redirect to='/'/>
+      }
+
+    let history = useHistory()
+    function goToSignIn(){
+      
+        history.push('/signin')
+    }
+
     const logOut = async(e)=>{
         console.log('logged out');
         await signOut(auth)
     }
-   
+   console.log(user);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -87,9 +85,13 @@ function SignUp() {
             <div className="flex flex-col justify-center items-center">
             <button className="hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={logOut}>
                     Sign Out
-                </button>
+            </button>           
             </div>
         </form>
+        <p>Already have an account?</p>
+            <button  className="bg-slate-primary hover:bg-blue-700 text-white font-bold py-2 px-4  my-2 rounded focus:outline-none focus:shadow-outline" onClick={goToSignIn}>
+                    Sign In
+            </button>
     </div>
   )
 }

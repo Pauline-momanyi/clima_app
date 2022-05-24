@@ -2,9 +2,9 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import logo from '../../mqlogo.png'
 import Button from './Button'
-import  QuestionForm from './QuestionForm'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch, faBars, faXmark, faHouse, faUserGroup } from "@fortawesome/free-solid-svg-icons"
+import { FaRegUser } from 'react-icons/fa'
 
 function Nav() {
     let [open, setOpen] = useState(false)
@@ -21,6 +21,7 @@ function Nav() {
         <div className='sm:hidden mr-1' onClick={()=>setOpen(!open)}>
             <FontAwesomeIcon icon={open? faXmark:faBars}></FontAwesomeIcon>
         </div>
+        <div><FaRegUser/></div>
         <ul className={`${open? "":"hidden" } sm:flex sm:items-center sm:z-auto z-[-1] sm:w-auto sm:pl-0 text-slate-primary mr-1`}>           
             <li><Link to='/' className='px-2'><FontAwesomeIcon icon={faHouse}></FontAwesomeIcon></Link></li> 
             <li><Link to='/users' className='px-2'><FontAwesomeIcon icon={faUserGroup}></FontAwesomeIcon></Link></li>    

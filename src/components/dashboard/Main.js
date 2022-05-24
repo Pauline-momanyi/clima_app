@@ -1,14 +1,12 @@
-import React, {useState, useEffect} from "react";
-import {Redirect} from 'react-router-dom'
+import React, {useState, useEffect } from "react";
+import { Redirect } from 'react-router-dom'
 import Categories from "./Categories";
 import Header from "./Header";
 import QuestionList from "./QuestionList";
 
-function Main({authorized}) {
-    const [isfetch, setisFetch] = useState(true)
+function Main({user,loading}) {
     const [data, setData] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
-
     
     useEffect(()=>{
         fetch('http://localhost:3000/questions?_embed=comments')
@@ -20,16 +18,14 @@ function Main({authorized}) {
         .catch(err=>console.log(err.message))
     },[])
 
-    console.log(data);
 
-
-    if(!authorized){
+    if(!user && !loading){
       return <Redirect to='/signup'/>
     }
 
   return (
     <main>
-       
+     {user && !loading ?
       <div className="sm:mx-10">
         <div className="flex mt-2 mx-2">
           <Categories />
@@ -38,7 +34,7 @@ function Main({authorized}) {
             <QuestionList questionData={data} isLoaded={isLoaded}/>
           </div>
         </div>
-      </div>
+      </div> : null}
     </main>
   );
 }
