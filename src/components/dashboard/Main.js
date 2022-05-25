@@ -3,20 +3,58 @@ import { Redirect } from 'react-router-dom'
 import Categories from "./Categories";
 import Header from "./Header";
 import QuestionList from "./QuestionList";
+import { db } from '../../config/fbConfig'
+import { collection, getDocs, addDoc } from "firebase/firestore"
 
 function Main({user,loading}) {
     const [data, setData] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
     
+    // useEffect(()=>{
+    //     fetch('http://localhost:3000/questions?_embed=comments')
+    //     .then(res=>res.json())
+    //     .then(data=>{
+    //         setData(data)
+    //         setIsLoaded(true)
+    //     })
+    //     .catch(err=>console.log(err.message))
+    // },[])
+    // const [posts, setPosts] = useState([])
+    const postCollection = collection(db, "posts")
+
+    // const[title, setTitle] = useState()
+    // const[question, setQuestion] = useState()
+    // const[tags, setTags] = useState([]) 
+    // const[upvotes, setUpvotes] = useState(0)
+    // const[downvotes, setDownvotes] = useState(0)
+    // const[comments, setComments] = useState([])
+
+    // const createPost = async()=>{
+    //     await addDoc(postCollection, {
+    //         title: title, 
+    //         question: question, 
+    //         tags:tags,
+    //         upvotes: upvotes,
+    //         downvotes: downvotes,
+    //         comments: comments
+    //     })
+    //     console.log('hey');
+
+    // }
+
     useEffect(()=>{
-        fetch('http://localhost:3000/questions?_embed=comments')
-        .then(res=>res.json())
-        .then(data=>{
-            setData(data)
+        const getPost = async()=>{
+            const fetchedPosts = await getDocs(postCollection)
+            console.log(fetchedPosts.docs);
+            setData(fetchedPosts.docs.map((doc)=>({...doc.data(), id:doc.id})))
             setIsLoaded(true)
-        })
-        .catch(err=>console.log(err.message))
-    },[])
+
+        }
+        // console.log(posts);
+       
+        getPost()
+    }, [])
+    console.log(data);
 
 
     if(!user && !loading){

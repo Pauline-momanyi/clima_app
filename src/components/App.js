@@ -9,6 +9,7 @@ import Main from "./dashboard/Main";
 import Footer from "./layout/Footer";
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../config/fbConfig'
+import QuestionDetails from "./dashboard/QuestionDetails";
 import FbFetch from "./FbFetch";
 
 function App() {
@@ -26,12 +27,13 @@ function App() {
   return (
     <>
         <Nav/>
-        <FbFetch/>
+        {/* <FbFetch/> */}
         <Switch>
-            <Route  path='/signin' exact component={SignIn}/>
+            <Route  exact path='/signin' component={SignIn}/>
             <Route exact path='/signup'><SignUp user={user}/></Route>
             <Route  path='/users' exact component={Users}/>
-            <Route exact path='/post' component={QuestionForm}/>                   
+            <Route exact path='/post' component={QuestionForm}/>  
+            <Route path='/question/:id'><QuestionDetails/></Route>                 
             <Route exact path='/'><Main user={user} loading={loading}/></Route>        
         </Switch>
         <Footer/>     

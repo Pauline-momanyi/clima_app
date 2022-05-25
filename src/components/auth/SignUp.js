@@ -33,10 +33,10 @@ function SignUp({user}) {
         return <Redirect to='/'/>
       }
 
-    let history = useHistory()
+    // let history = useHistory()
     function goToSignIn(){
-      
-        history.push('/signin')
+        console.log('clicked');      
+        // history.push('/signin')
     }
 
     const logOut = async(e)=>{
