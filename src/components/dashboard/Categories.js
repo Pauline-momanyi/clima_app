@@ -2,18 +2,17 @@ import React from 'react'
 
 function Categories({data}) {
   // console.log(data);
-  const tagArray = data.map(data=> data.tags)
-  const tags = tagArray.map(tag=>tag)
-  console.log(tags);
-  
+ 
+  const tags = data.map(data=> data.tags)
+
 
   return (
     <div className='border border-orange-primary mr-4 p-3 h-full'>
-        <h2 className='font-semibold'>Popular Tags</h2>      
+        <h2 className='font-semibold'>Popular Tags</h2>   
         
-          {tags.map(tag=>(
-            <ul>{tag.map(itag=>(
-              <li>{itag}</li>
+          {tags.map((tag, index)=>(
+            <ul key={index}>{tag.map(itag=>(
+              <li key={itag}>{itag}</li>
               ))}
             </ul>
           
