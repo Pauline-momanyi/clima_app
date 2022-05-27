@@ -8,14 +8,16 @@ import QuestionForm from "./layout/QuestionForm";
 import Main from "./dashboard/Main";
 import Footer from "./layout/Footer";
 import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../config/fbConfig'
+import { db, auth } from '../config/fbConfig'
 import QuestionDetails from "./dashboard/QuestionDetails";
-import FbFetch from "./FbFetch";
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 function App() {
-  const [authorized, setAuthorized] = useState(false)
+  
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [data, setData] = useState([])
+  const [search, setSearch] = useState("")
 
   useEffect(()=>{
       onAuthStateChanged(auth, (currentUser)=>{
@@ -23,18 +25,20 @@ function App() {
           setUser(currentUser)
       })
   },[])  
+  // console.log(data);
+  // console.log(user.email);
+  // console.log(search);
 
   return (
     <>
-        <Nav/>
-        {/* <FbFetch/> */}
+        <Nav user={user} search={search} setSearch={setSearch}/>
         <Switch>
-            <Route  exact path='/signin' component={SignIn}/>
+            <Route exact path='/signin'><SignIn user={user}/></Route>
             <Route exact path='/signup'><SignUp user={user}/></Route>
             <Route  path='/users' exact component={Users}/>
             <Route exact path='/post' component={QuestionForm}/>  
-            <Route path='/question/:id'><QuestionDetails/></Route>                 
-            <Route exact path='/'><Main user={user} loading={loading}/></Route>        
+            <Route path='/question/:id'><QuestionDetails data={data} /></Route>                 
+            <Route exact path='/'><Main user={user} loading={loading} data={data} setData={setData} search={search} setSearch={setSearch} /></Route>        
         </Switch>
         <Footer/>     
     </>

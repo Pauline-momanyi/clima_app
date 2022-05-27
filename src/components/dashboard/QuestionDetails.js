@@ -1,37 +1,52 @@
 import React, {useState, useContext} from 'react'
 import { useParams } from 'react-router-dom'
 import {FaThumbsUp, FaThumbsDown} from 'react-icons/fa'
-import {QuestContext} from './QuestionItem'
+import { auth, db} from '../../config/fbConfig'
+import {arrayUnion, doc, onSnapshot, updateDoc} from 'firebase/firestore'
 
 function QuestionDetails({data, questionData}) {
   
     const { id } = useParams();
-    const currQuest = useContext(QuestContext)
-    // const[cq, setCq] = useState([])
-  
-      // console.log(questionData);
-    
-    // console.log(currQuest);
-    // let comm
-    
+    const [comment, setComment] = useState("")
+    // const [comments, setComments] = useState([])
+    const commentRef = doc(db, "posts", id)
+
+
     const currentQuestion = data.filter(question=>question.id === id) 
     console.log(currentQuestion);
-    function setnew(){
-      console.log(currentQuestion);
-      
-      // setCq(questionData)
-      console.log(comm);
-      // const eachComm = comm.map(comme=>comme.comment)
-      // console.log(eachComm);
-    }
+
+    // useEffect(() => {
+    //   const docRef = doc(db, "posts", id);
+    //   onSnapshot(docRef, (snapshot) => {
+    //     setComments(snapshot.data().comments);
+    //   });
+    // }, []);
+
+   
+    function handleNewComment(e){
+      e.preventDefault()
+      console.log(comment);
+
+          updateDoc(commentRef, {
+            comments: arrayUnion({
+              comment: comment,
+              upvotes: 0,
+              downvotes: 0,
+            }),
+          }).then(() => {
+            setComment("");
+          });
+        }
+  
+
     let comm = currentQuestion.map(ques=>ques.comments)
     console.log(currentQuestion[0].comments);
-    console.log(comm);
+    // console.log(comm);
     // setnew()
     
   return (
     <div className="bg-gray-primary my-2 p-4 rounded">
-      QuestionDetails {id}    
+      {/* QuestionDetails {id}     */}
 
       <p className='font-bold'>{currentQuestion[0].title} </p>  
       <p className='text-sm'><span className='font-bold text-2xl mx-2'>Q</span>{currentQuestion[0].question} </p>  
@@ -46,16 +61,17 @@ function QuestionDetails({data, questionData}) {
         </div>
         </div>
         
-      ))}
-  
+      ))}  
        
-      <form  className='flex flex-col justify-center items-center' onSubmit={console.log('submitted')}>
+      <form  className='flex flex-col justify-center items-center' onSubmit={handleNewComment}>
         <p className='font-bold'>Have a different Answer?</p>
-        <textarea name="" id="newComment" cols="30" rows="5" className='w-5/6'></textarea>
+        <textarea name="" id="newComment" cols="30" rows="5" className='w-5/6' value={comment} onChange={(e)=>
+          {setComment(e.target.value)
+            console.log(comment);
+          }}></textarea>
         <button className="bg-slate-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2" type='submit'>SUBMIT</button>
       </form>
-    </div>
-    
+    </div>    
   )
 }
 

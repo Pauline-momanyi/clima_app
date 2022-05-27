@@ -3,58 +3,52 @@ import { Redirect } from 'react-router-dom'
 import Categories from "./Categories";
 import Header from "./Header";
 import QuestionList from "./QuestionList";
-import { db } from '../../config/fbConfig'
-import { collection, getDocs, addDoc } from "firebase/firestore"
+import { db, auth } from '../../config/fbConfig'
+import { collection, getDocs } from "firebase/firestore"
+import { useAuthState } from 'react-firebase-hooks/auth'
 
-function Main({user,loading}) {
-    const [data, setData] = useState([])
+function Main({user,loading, data, setData, search }) {
     const [isLoaded, setIsLoaded] = useState(false)
-    
-    // useEffect(()=>{
-    //     fetch('http://localhost:3000/questions?_embed=comments')
-    //     .then(res=>res.json())
-    //     .then(data=>{
-    //         setData(data)
-    //         setIsLoaded(true)
-    //     })
-    //     .catch(err=>console.log(err.message))
-    // },[])
-    // const [posts, setPosts] = useState([])
     const postCollection = collection(db, "posts")
-
-    // const[title, setTitle] = useState()
-    // const[question, setQuestion] = useState()
-    // const[tags, setTags] = useState([]) 
-    // const[upvotes, setUpvotes] = useState(0)
-    // const[downvotes, setDownvotes] = useState(0)
-    // const[comments, setComments] = useState([])
-
-    // const createPost = async()=>{
-    //     await addDoc(postCollection, {
-    //         title: title, 
-    //         question: question, 
-    //         tags:tags,
-    //         upvotes: upvotes,
-    //         downvotes: downvotes,
-    //         comments: comments
-    //     })
-    //     console.log('hey');
-
-    // }
+    // const[read, setRead] = useState(true)
+  let searchedQuery = data.filter(query=>(
+    query.title.toLowerCase().includes(search.toLowerCase())
+    // query.title.toLowerCase().includes(search.toLowerCase())
+  ))
+  // console.log(searchedQuery);
+  useEffect(()=>{
+    if(data.length>1){
+    console.log(data)
+    }},[])
 
     useEffect(()=>{
         const getPost = async()=>{
             const fetchedPosts = await getDocs(postCollection)
-            console.log(fetchedPosts.docs);
+            // console.log(fetchedPosts.docs);
             setData(fetchedPosts.docs.map((doc)=>({...doc.data(), id:doc.id})))
             setIsLoaded(true)
-
         }
         // console.log(posts);
        
         getPost()
     }, [])
-    console.log(data);
+    // console.log(data);
+
+  const [currentlyLoggedinUser] = useAuthState(auth);
+  useEffect(()=>{
+    // console.log(currentlyLoggedinUser.displayName);
+  },[])
+
+  if (currentlyLoggedinUser){
+    console.log(currentlyLoggedinUser.displayName)
+    }
+    
+
+    const handleReaction = async(id, reaction)=>{
+      console.log(id);
+      console.log(reaction);
+      // const newFields = {upvotes: upvotes+1}
+    }
 
 
     if(!user && !loading){
@@ -66,10 +60,10 @@ function Main({user,loading}) {
      {user && !loading ?
       <div className="sm:mx-10">
         <div className="flex mt-2 mx-2">
-          <Categories />
+          <Categories data={data}/>
           <div>
             <Header />
-            <QuestionList questionData={data} isLoaded={isLoaded}/>
+            <QuestionList questionData={searchedQuery} isLoaded={isLoaded} reaction={handleReaction}/>
           </div>
         </div>
       </div> : null}
@@ -77,24 +71,5 @@ function Main({user,loading}) {
   );
 }
 
+
 export default Main;
-
-
-  // useEffect(()=>{
-    //     const options = {
-    //         method: 'GET',
-    //         headers: {
-    //             'X-RapidAPI-Host': 'stack-overflow.p.rapidapi.com',
-    //             'X-RapidAPI-Key': 'a37da41679msh85c390529de135dp134b22jsn8fe66d12cf5d'
-    //         }
-    //     };
-        
-    //     fetch('https://stack-overflow.p.rapidapi.com/?q=Javascript', options)
-    //         .then(response => response.json())
-    //         .then(response => {
-    //             setData(response.data)
-    //             setIsLoaded(true)
-    //         })
-                
-    //         .catch(err => console.error(err.message));
-    // },[isfetch])

@@ -9,14 +9,12 @@ import { getFirestore } from "@firebase/firestore"
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAPwNGHlTXyNey-rEIYN8ok-o9PebnTH00",
-  authDomain: "phase2-mq.firebaseapp.com",
-  projectId: "phase2-mq",
-  storageBucket: "phase2-mq.appspot.com",
-  messagingSenderId: "983472936187",
-  appId: "1:983472936187:web:2cd99c46456165ae034c5e",
-  measurementId: "G-6093LY2M5N"
-};
+  apiKey: "AIzaSyDV81W9n3lCKmPDkUy6M4BsBkvaRd3UT9A",
+  authDomain: "mq-phase2.firebaseapp.com",
+  projectId: "mq-phase2",
+  storageBucket: "mq-phase2.appspot.com",
+  messagingSenderId: "965840908174",
+  appId: "1:965840908174:web:ba6042091118984a017edf"};
 
 const app = initializeApp(firebaseConfig); //initialize connection
 export const auth = getAuth(app)

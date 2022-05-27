@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { auth } from "../../config/fbConfig";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
-function SignIn() {
+function SignIn({user}) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,14 +14,7 @@ function SignIn() {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   }
 
-  const [user, setUser] = useState();
   const [wrongCred, setWrongCred] = useState();
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-  }, []);
 
   const handleSignin = async (e) => {
     e.preventDefault();
@@ -38,15 +31,17 @@ function SignIn() {
       setWrongCred(error.message);
     }
   };
-  if (!wrongCred && user) {
-    return <Redirect to="/" />;
-    console.log(user);
-  }
+  
+  if(user){
+    console.log(user.email.split('')[0]);
+     return <Redirect to='/'/>
+   }
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <h3>Signed in as:</h3>
-      {user ? user.email : "Not logged in"}
+      {/* <h3>Signed in as:</h3> */}
+      {/* {user ? user.email : "Not logged in"} */}
+      {wrongCred && <p className="flex"><AiFillStar className="text-red-600"/>Email and Password do not match<AiFillStar className="text-red-600"/></p>}
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-4"
         onSubmit={handleSignin}

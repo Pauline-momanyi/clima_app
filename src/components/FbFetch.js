@@ -51,3 +51,10 @@ function FbFetch() {
 }
 
 export default FbFetch
+apiKey: "AIzaSyAPwNGHlTXyNey-rEIYN8ok-o9PebnTH00",
+  authDomain: "phase2-mq.firebaseapp.com",
+  projectId: "phase2-mq",
+  storageBucket: "phase2-mq.appspot.com",
+  messagingSenderId: "983472936187",
+  appId: "1:983472936187:web:2cd99c46456165ae034c5e",
+  measurementId: "G-6093LY2M5N"

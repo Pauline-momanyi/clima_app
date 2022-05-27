@@ -4,8 +4,9 @@ import logo from '../../mqlogo.png'
 import Button from './Button'
 import Modal from './modal/Modal'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSearch, faBars, faXmark, faHouse, faUserGroup } from "@fortawesome/free-solid-svg-icons"
-import { FaRegUser } from 'react-icons/fa'
+import { faSearch, faBars, faXmark, faHouse, faUserGroup, faUser } from "@fortawesome/free-solid-svg-icons"
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { db, auth } from '../../config/fbConfig'
 
 
 
@@ -13,14 +14,18 @@ function Nav({user, search, setSearch}) {
     let [open, setOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false);
 
-//     const avatar = ()=>{if(user){
-//         return <FaRegUser />
-//     }else{
-//         return user.email.substr(0,1).toUpperCase()
-//     }
-// }
+    const [currentlyLoggedinUser] = useAuthState(auth);
+
     
-    
+
+    let isPresent;    
+    if (currentlyLoggedinUser){
+    console.log(currentlyLoggedinUser.displayName.toUpperCase())
+    console.log(currentlyLoggedinUser.email.toUpperCase())
+    isPresent = currentlyLoggedinUser.displayName.toUpperCase()
+
+    }
+
     return (
     <div className="shadow-md flex items-center justify-between">
         <div className="font-bold cursor-pointer flex items-center ">
@@ -37,7 +42,9 @@ function Nav({user, search, setSearch}) {
         <div onClick={() => {
           setModalOpen(true);
           console.log('clicked');
-        }}></div>
+        }} className = 'font-bold text-2xl rounded-full border border-slate-primary w-8 h-8 flex justify-center items-center'>
+           {isPresent? isPresent[0]:<FontAwesomeIcon icon={faUser}></FontAwesomeIcon>}
+        </div>
         {modalOpen && <Modal setOpenModal={setModalOpen} />}  
         <ul className={`${open? "":"hidden" } sm:flex sm:items-center sm:z-auto z-[-1] sm:w-auto sm:pl-0 text-slate-primary mr-1`}>           
             <li><Link to='/' className='px-2'><FontAwesomeIcon icon={faHouse}></FontAwesomeIcon></Link></li> 
