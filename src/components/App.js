@@ -19,7 +19,7 @@ function App() {
       <Navbar />
       <LoginContext.Provider value={{uid, nid, setNid, setUid}}>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/about">
             <About />
           </Route>
           <Route exact path="/signin">
