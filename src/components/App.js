@@ -1,47 +1,47 @@
-import React, {useState, useEffect} from "react";
-import { Switch, Route} from "react-router-dom";
-import Nav from "./layout/Nav";
-import SignIn from "./auth/SignIn";
-import SignUp from "./auth/SignUp"
-import Users from "./layout/Users";
-import QuestionForm from "./layout/QuestionForm";
-import Main from "./dashboard/Main";
-import Footer from "./layout/Footer";
-import { onAuthStateChanged } from 'firebase/auth'
-import { db, auth } from '../config/fbConfig'
-import QuestionDetails from "./dashboard/QuestionDetails";
-import { useAuthState } from 'react-firebase-hooks/auth'
+import React, {useState} from "react";
+import { Switch, Route } from "react-router-dom";
+import Navbar from "./navbar/Navbar";
+import About from "./About";
+import Footer from "./Footer";
+import Signup from "./auth/Signup";
+import Signin from "./auth/Signin";
+import Patient from "./rolepage/Patient";
+import Nurse from "./rolepage/Nurse";
+import {LoginContext} from './contexts/LoginContext'
+import Newentry from "./rolepage/Newentry";
 
 function App() {
-  
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [data, setData] = useState([])
-  const [search, setSearch] = useState("")
-
-  useEffect(()=>{
-      onAuthStateChanged(auth, (currentUser)=>{
-        setLoading(false)
-          setUser(currentUser)
-      })
-  },[])  
-  // console.log(data);
-  // console.log(user.email);
-  // console.log(search);
-
+  const [uid, setUid] = useState("")
+  const [nid, setNid] = useState("")
   return (
-    <>
-        <Nav user={user} search={search} setSearch={setSearch}/>
+    <div>
+
+      <Navbar />
+      <LoginContext.Provider value={{uid, nid, setNid, setUid}}>
         <Switch>
-            <Route exact path='/signin'><SignIn user={user}/></Route>
-            <Route exact path='/signup'><SignUp user={user}/></Route>
-            <Route  path='/users' exact component={Users}/>
-            <Route exact path='/post' component={QuestionForm}/>  
-            <Route path='/question/:id'><QuestionDetails data={data} /></Route>                 
-            <Route exact path='/'><Main user={user} loading={loading} data={data} setData={setData} search={search} setSearch={setSearch} /></Route>        
+          <Route exact path="/">
+            <About />
+          </Route>
+          <Route exact path="/signin">
+            <Signin />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/patient">
+            <Patient />
+          </Route>
+          <Route exact path="/nurse">
+            <Nurse/>
+          </Route>
+          <Route exact path="/new_entry">
+            <Newentry />
+          </Route>
         </Switch>
-        <Footer/>     
-    </>
+      </LoginContext.Provider>
+     
+      <Footer />
+    </div>
   );
 }
 
