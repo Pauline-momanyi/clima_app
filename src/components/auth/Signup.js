@@ -3,7 +3,7 @@ import UserSignup from './UserSignup'
 import NurseSignup from './NurseSignup'
 
 function Signup({user}) {
-    const [log, setLog] = useState("")
+    // const [log, setLog] = useState("")
     const [role, setRole] = useState("")
 
     const [formData, setFormData] = useState({
@@ -57,7 +57,7 @@ function Signup({user}) {
         {/* <UserSignup/> */}
 
 
-        <p>{log? log: "invalid details"}</p>
+        {/* <p>{log? log: "invalid details"}</p> */}
 
         <p>Already have an account?</p>
             <button  className="bg-slate-primary hover:bg-blue-700 text-white font-bold py-2 px-4  my-2 rounded focus:outline-none focus:shadow-outline">

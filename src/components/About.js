@@ -18,24 +18,21 @@ function About() {
           <TiThumbsOk />        
           <h1 className="font-bold text-lg">Satisfaction Guarantee</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
-            commodi.
+          A 100% satisfaction guarantee not only guarantees that the customer will be happy, but also guarantees that you'll get another chance.
           </p>
         </div>
         <div>
             <FaUserNurse/>
           <h1 className="font-bold text-lg">Professional Nurse</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
-            commodi.
+          Professionalism reflects the act of providing quality patient care while honoring the values of respect, advocacy, and responsibility
           </p>
         </div>
         <div>
             <BiDollarCircle/>
           <h1 className="font-bold text-lg">Low Cost Service</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
-            commodi.
+          A low-cost Service Provider is well positioned to use its low cost structure to induce its customers not to switch
           </p>
         </div>
       </div>
@@ -44,9 +41,9 @@ function About() {
         <p>We take good care of the elderly</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia laudantium rerum fuga!</p>
         <ul>
-            <li>Lorem ipsum dolor sit amet consectetur.</li>
-            <li>Lorem ipsum dolor sit amet consectetur.</li>
-            <li>Lorem ipsum dolor sit amet consectetur.</li>
+            <li>Service guarantee</li>
+            <li>Flexible working hours</li>
+            <li>Experienced nurses</li>
         </ul>
         <button className="rounded-full bg-orange-primary">More About Us ..</button>
       </div>
