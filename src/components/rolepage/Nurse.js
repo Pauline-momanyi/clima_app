@@ -6,7 +6,7 @@ function Nurse() {
     const [showEntry, setShowEntry] = useState(false)
     useEffect(() => {
       const id = JSON.parse(localStorage.getItem('nid'))
-        fetch(`http://localhost:9292/nurse_scope/${id}`)
+        fetch(`https://climarubyapi.herokuapp.com/nurse_scope/${id}`)
         .then((res) => res.json())
         .then((data) => {
         setPatients(() => data);
@@ -16,7 +16,7 @@ function Nurse() {
 
 function handleDelete(id){
     console.log(id);
-    fetch(`http://localhost:9292/details/${id}`,{
+    fetch(`https://climarubyapi.herokuapp.com/details/${id}`,{
         method: 'DELETE'
     })
     .then(res=>res.json())
@@ -38,12 +38,14 @@ function handleDelete(id){
        <button onClick={handleNewEntry} className="bg-slate-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline items-center">NEW ENTRY</button>
        <br/>
        <hr/> 
-       {showEntry === true && <Newentry/>}
+
+       {showEntry === true && <Newentry />}
        
     {typeof patients !== "undefined" && patients.length>0 ? (    
      
       <div> 
-        <Newentry docid = {patients[0].doctor_id}/>
+        {/* <Newentry docid = {patients[0].doctor_id}/> */}
+        {/* {showEntry === true && <Newentry docid={patients[0].doctor_id}/>}        */}
         <div className='flex justify-between ml-5'>
             <h2>Recent Entries</h2>
         </div>                     

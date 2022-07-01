@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
+import { Redirect } from 'react-router-dom';
 
-function Newentry({docid}) {
+function Newentry() {
     const [newData, setNewData] = useState({
-        doctor_id: docid,
+        doctor_id: "",
         patient_id: "",
         temperature: "",
         pressure: "",
@@ -16,7 +17,7 @@ function Newentry({docid}) {
         e.preventDefault()
         console.log(newData);
         // console.log(docid);
-        fetch('http://localhost:9292/newentry', {
+        fetch('https://climarubyapi.herokuapp.com/newentry', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -37,10 +38,10 @@ function Newentry({docid}) {
                 <div className="shadow overflow-hidden sm:rounded-md">
                 <div className="px-4 py-5 bg-white sm:p-6">
                     <div className="grid grid-cols-6 gap-6">
-                        {/* <div className="col-span-6 sm:col-span-3">
+                        <div className="col-span-6 sm:col-span-3">
                             <label htmlFor="doctor_id" className="block text-sm font-medium text-gray-700">Doctor id</label>
                             <input type="number" name="doctor_id" id="doctor_id" value={newData.doctor_id} onChange={handleChange} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
-                        </div> */}
+                        </div>
 
                         <div className="col-span-6 sm:col-span-3">
                             <label htmlFor="patient_id" className="block text-sm font-medium text-gray-700">Patient id</label>

@@ -27,7 +27,7 @@ function Signin() {
     console.log(role);
     // console.log(nid);
     if (role === "user"){
-        fetch('http://localhost:9292/login', {
+        fetch('https://climarubyapi.herokuapp.com/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ function Signin() {
         });
         
     }else{
-        fetch('http://localhost:9292/nurse_login', {
+        fetch('https://climarubyapi.herokuapp.com/nurse_login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,6 +53,7 @@ function Signin() {
             // console.log(data.message);
             console.log(data);
             setNid(data.id)
+            // console.log(headers.message);
         })
     }
    

@@ -14,7 +14,7 @@ function Patient() {
     const id = JSON.parse(localStorage.getItem('uid'))  
     
     
-    fetch(`http://localhost:9292/personal_details/${id}`)
+    fetch(`https://climarubyapi.herokuapp.com/personal_details/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setPatient(() => data);
@@ -140,7 +140,7 @@ function Patient() {
             
           </div>
         ) : (
-          "absent"
+          "No details for this user!"
         )}
       </div>
 
